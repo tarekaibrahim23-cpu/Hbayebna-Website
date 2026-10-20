@@ -355,7 +355,7 @@
   var top = ticket.querySelector(".ticket-top");
   var countEl = document.createElement("span");
   countEl.className = "stage-count";
-  top.insertBefore(countEl, top.lastElementChild);
+  top.appendChild(countEl);
   var bar = document.createElement("div");
   bar.className = "stage-progress";
   bar.innerHTML = "<span></span>";
