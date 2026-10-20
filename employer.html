@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="t.employer">Employer Registration · Hbayebna</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Reem+Kufi:wght@500;700&family=Zilla+Slab:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="Hbayebna home">
+      <img src="assets/logo-sm.png" alt="" width="48" height="48">
+      <span><b>Hbayebna</b><small data-i18n="brand.sub">Recruitment Agency</small></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+      <li><a href="index.html#services" data-i18n="nav.services">Services</a></li>
+      <li><a href="index.html#clients" data-i18n="nav.clients">Clients</a></li>
+      <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+      <li><a href="employer.html" aria-current="page" data-i18n="nav.hire">Hire Staff</a></li>
+      <li><a href="employee.html" data-i18n="nav.job">Find a Job</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="ar" aria-pressed="false">عربي</button>
+      </div>
+      <button class="menu-btn" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow" data-i18n="er.eyebrow">For restaurants, hotels &amp; caterers</span>
+        <h1 data-i18n="er.title">Employer registration — request staff</h1>
+        <p data-i18n="er.lead">Tell us about your establishment and the position you need to fill. A Hbayebna consultant will contact you within 1–2 working days with matching candidates.</p>
+      </div>
+      <img src="assets/logo-sm.png" alt="" width="110" height="110">
+    </div>
+  </section>
+
+  <div class="wrap form-layout">
+    <aside class="steps-aside">
+      <ol class="steps-nav">
+        <li><a href="#s-company" data-step="s-company"><b>1</b><span data-i18n="er.s1">Your establishment</span></a></li>
+        <li><a href="#s-vacancy" data-step="s-vacancy"><b>2</b><span data-i18n="er.s2">Position needed</span></a></li>
+        <li><a href="#s-offer" data-step="s-offer"><b>3</b><span data-i18n="er.s3">Salary &amp; benefits</span></a></li>
+        <li><a href="#s-extra" data-step="s-extra"><b>4</b><span data-i18n="er.s4">Other services</span></a></li>
+      </ol>
+      <p class="side-note" data-i18n="side.note">Fields marked * are required. Your information is used only to process your request.</p>
+    </aside>
+
+    <div class="ticket" id="ticket">
+      <div class="ticket-top">
+        <span data-i18n="er.ticket">Employer request</span>
+        <span class="tno" id="refNo">HB-E-000000</span>
+      </div>
+
+      <form id="regForm" data-form="employer" data-ref-prefix="HB-E" novalidate>
+        <!-- 1. Establishment -->
+        <fieldset id="s-company">
+          <legend><span class="num">1</span><span data-i18n="er.s1">Your establishment</span></legend>
+          <div class="grid-2">
+            <div class="field">
+              <label for="companyName"><span data-i18n="f.companyName">Restaurant / company name</span><span class="req">*</span></label>
+              <input type="text" id="companyName" name="companyName" required autocomplete="organization">
+              <span class="err" data-i18n="err.required">This field is required.</span>
+            </div>
+            <div class="field">
+              <label for="contactName"><span data-i18n="f.contactName">Contact person</span><span class="req">*</span></label>
+              <input type="text" id="contactName" name="contactName" required autocomplete="name">
+              <span class="err" data-i18n="err.required">This field is required.</span>
+            </div>
+            <div class="field">
+              <label for="contactRole" data-i18n="f.contactRole">Job title of contact person</label>
+              <input type="text" id="contactRole" name="contactRole" data-i18n-ph="ph.contactRole" placeholder="e.g. Owner, Operations Manager">
+            </div>
+            <div class="field">
+              <label for="phone"><span data-i18n="f.phone">Phone / WhatsApp</span><span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+961 3 000 000" pattern="^\+?[0-9 ()\-]{7,20}$">
+              <span class="err" data-i18n="err.phone">Enter a valid phone number, e.g. +961 3 000 000.</span>
+            </div>
+            <div class="field">
+              <label for="email"><span data-i18n="f.email">Email</span><span class="req">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="name@restaurant.com">
+              <span class="err" data-i18n="err.email">Enter a valid email address.</span>
+            </div>
+            <div class="field">
+              <label for="country"><span data-i18n="f.country">Country</span><span class="req">*</span></label>
+              <select id="country" name="country" required data-list="countries"><option value="" data-i18n="sel.choose">Select…</option></select>
+              <span class="err" data-i18n="err.choose">Please choose an option.</span>
+            </div>
+            <div class="field">
+              <label for="city"><span data-i18n="f.city">City / area</span><span class="req">*</span></label>
+              <input type="text" id="city" name="city" required autocomplete="address-level2">
+              <span class="err" data-i18n="err.required">This field is required.</span>
+            </div>
+            <div class="field">
+              <label for="restaurantType"><span data-i18n="f.restaurantType">Type of restaurant</span><span class="req">*</span></label>
+              <select id="restaurantType" name="restaurantType" required data-list="restaurantTypes"><option value="" data-i18n="sel.choose">Select…</option></select>
+              <span class="err" data-i18n="err.choose">Please choose an option.</span>
+            </div>
+            <div class="field full cond" data-show-if="restaurantType=Other">
+              <label for="restaurantTypeOther" data-i18n="f.specify">Please specify</label>
+              <input type="text" id="restaurantTypeOther" name="restaurantTypeOther">
+            </div>
+            <div class="field full">
+              <span class="group-label" data-i18n="f.cuisine">Cuisine / concept</span>
+              <div class="choices" data-list="cuisines" data-name="cuisine" data-type="checkbox"></div>
+            </div>
+            <div class="field">
+              <label for="branches" data-i18n="f.branches">Number of branches</label>
+              <input type="number" id="branches" name="branches" min="1" max="500" inputmode="numeric" placeholder="1">
+            </div>
+            <div class="field">
+              <label for="seats" data-i18n="f.seats">Seating capacity (approx.)</label>
+              <input type="number" id="seats" name="seats" min="0" max="5000" inputmode="numeric" placeholder="120">
+            </div>
+            <div class="field full" data-required-group="status">
+              <span class="group-label"><span data-i18n="f.status">Establishment status</span><span class="req">*</span></span>
+              <div class="choices" data-list="estStatus" data-name="status" data-type="radio"></div>
+              <span class="err" data-i18n="err.choose">Please choose an option.</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 2. Vacancy -->
+        <fieldset id="s-vacancy">
+          <legend><span class="num">2</span><span data-i18n="er.s2">Position needed</span></legend>
+          <div class="grid-2">
+            <div class="field">
+              <label for="position"><span data-i18n="f.position">Position required</span><span class="req">*</span></label>
+              <select id="position" name="position" required data-list="positions"><option value="" data-i18n="sel.choose">Select…</option></select>
+              <span class="err" data-i18n="err.choose">Please choose an option.</span>
+            </div>
+            <div class="field">
+              <label for="headcount"><span data-i18n="f.headcount">Number of employees needed</span><span class="req">*</span></label>
+              <input type="number" id="headcount" name="headcount" required min="1" max="500" inputmode="numeric" value="1">
+              <span class="err" data-i18n="err.number">Enter a number between 1 and 500.</span>
+            </div>
+            <div class="field full cond" data-show-if="position=Other">
+              <label for="positionOther" data-i18n="f.specify">Please specify</label>
+              <input type="text" id="positionOther" name="positionOther">
+            </div>
+            <div class="field full">
+              <label for="otherPositions" data-i18n="f.otherPositions">Other positions needed (if more than one)</label>
+              <input type="text" id="otherPositions" name="otherPositions" data-i18n-ph="ph.otherPositions" placeholder="e.g. 2 Waiters, 1 Barista, 1 Commis Chef">
+            </div>
+            <div class="field full" data-required-group="employmentType">
+              <span class="group-label"><span data-i18n="f.employmentType">Employment type</span><span class="req">*</span></span>
+              <div class="choices" data-list="employmentTypes" data-name="employmentType" data-type="radio"></div>
+              <span class="err" data-i18n="err.choose">Please choose an option.</span>
+            </div>
+            <div class="field">
+              <label for="experienceRequired"><span data-i18n="f.experienceRequired">Experience required</span><span class="req">*</span></label>
+              <select id="experienceRequired" name="experienceRequired" required data-list="expRanges"><option value="" data-i18n="sel.choose">Select…</option></select>
+              <span class="err" data-i18n="err.choose">Please choose an option.</span>
+            </div>
+            <div class="field">
+              <label for="educationRequired" data-i18n="f.educationRequired">Education / training required</label>
+              <select id="educationRequired" name="educationRequired" data-list="education"><option value="" data-i18n="sel.choose">Select…</option></select>
+            </div>
+            <div class="field full">
+              <span class="group-label" data-i18n="f.languagesRequired">Languages required</span>
+              <div class="choices" data-list="languages" data-name="languagesRequired" data-type="checkbox"></div>
+            </div>
+            <div class="field full">
+              <span class="group-label" data-i18n="f.gulfExpPreferred">Gulf experience preferred?</span>
+              <div class="choices" data-list="yesNoAny" data-name="gulfExpPreferred" data-type="radio"></div>
+            </div>
+            <div class="field full" data-required-group="candidateSource">
+              <span class="group-label"><span data-i18n="f.candidateSource">Candidates from</span><span class="req">*</span></span>
+              <div class="choices" data-list="candidateSource" data-name="candidateSource" data-type="radio"></div>
+              <span class="err" data-i18n="err.choose">Please choose an option.</span>
+            </div>
+            <div class="field full">
+              <label for="jobDescription" data-i18n="f.jobDescription">Job description &amp; specific requirements</label>
+              <textarea id="jobDescription" name="jobDescription" data-i18n-ph="ph.jobDescription" placeholder="Main duties, skills, specialties (e.g. Lebanese mezze, tandoor, latte art), shift pattern…"></textarea>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 3. Offer -->
+        <fieldset id="s-offer">
+          <legend><span class="num">3</span><span data-i18n="er.s3">Salary &amp; benefits</span></legend>
+          <div class="grid-2">
+            <div class="field full">
+              <label for="salaryMin"><span data-i18n="f.salaryRange">Salary offered (from – to)</span><span class="req">*</span></label>
+              <div class="inline">
+                <input type="number" id="salaryMin" name="salaryMin" required min="0" inputmode="numeric" data-i18n-ph="ph.from" placeholder="From" aria-label="Minimum salary">
+                <input type="number" id="salaryMax" name="salaryMax" min="0" inputmode="numeric" data-i18n-ph="ph.to" placeholder="To" aria-label="Maximum salary">
+                <select id="currency" name="currency" required data-list="currencies" aria-label="Currency"></select>
+              </div>
+              <span class="err" data-i18n="err.salary">Enter the salary range (the second value must be higher than the first).</span>
+            </div>
+            <div class="field full">
+              <span class="group-label" data-i18n="f.salaryPeriod">Salary paid</span>
+              <div class="choices" data-list="salaryPeriods" data-name="salaryPeriod" data-type="radio" data-default="Monthly"></div>
+            </div>
+            <div class="field full">
+              <span class="group-label" data-i18n="f.benefits">Benefits provided</span>
+              <div class="choices" data-list="benefits" data-name="benefits" data-type="checkbox"></div>
+            </div>
+            <div class="field">
+              <label for="workingHours" data-i18n="f.workingHours">Working hours per day</label>
+              <input type="number" id="workingHours" name="workingHours" min="1" max="16" inputmode="numeric" placeholder="10">
+            </div>
+            <div class="field">
+              <label for="daysOff" data-i18n="f.daysOff">Days off per week</label>
+              <input type="number" id="daysOff" name="daysOff" min="0" max="3" inputmode="numeric" placeholder="1">
+            </div>
+            <div class="field">
+              <label for="contractDuration" data-i18n="f.contractDuration">Contract duration</label>
+              <select id="contractDuration" name="contractDuration" data-list="contracts"><option value="" data-i18n="sel.choose">Select…</option></select>
+            </div>
+            <div class="field">
+              <label for="startDate"><span data-i18n="f.startDate">Required start date</span><span class="req">*</span></label>
+              <input type="date" id="startDate" name="startDate" required>
+              <span class="err" data-i18n="err.required">This field is required.</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 4. Extra -->
+        <fieldset id="s-extra">
+          <legend><span class="num">4</span><span data-i18n="er.s4">Other services</span></legend>
+          <div class="grid-2">
+            <div class="field full">
+              <span class="group-label" data-i18n="f.otherServices">Are you also interested in any of these services?</span>
+              <div class="choices" data-list="services" data-name="otherServices" data-type="checkbox"></div>
+            </div>
+            <div class="field full">
+              <label for="notes" data-i18n="f.notes">Anything else we should know?</label>
+              <textarea id="notes" name="notes"></textarea>
+            </div>
+            <div class="field full" data-required-group="consent">
+              <label class="consent"><input type="checkbox" id="consent" name="consent" value="Yes"><span data-i18n="f.consentEr">I confirm the information is correct and agree that Hbayebna may contact me about this request.</span></label>
+              <span class="err" data-i18n="err.consent">Please confirm to continue.</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-actions">
+          <span class="status" id="formStatus" role="status" aria-live="polite"></span>
+          <button class="btn" type="submit" id="submitBtn">
+            <span data-i18n="btn.submitEr">Send request</span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </form>
+
+      <div class="success" id="success" hidden></div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© <span class="year">2026</span> <span data-i18n="ft.name">Hbayebna Recruitment Agency</span></span>
+    <span><a href="index.html" data-i18n="ft.back">Back to home</a></span>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+</body>
+</html>

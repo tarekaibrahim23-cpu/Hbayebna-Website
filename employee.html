@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="t.employee">Job Seeker Registration · Hbayebna</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Reem+Kufi:wght@500;700&family=Zilla+Slab:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="Hbayebna home">
+      <img src="assets/logo-sm.png" alt="" width="48" height="48">
+      <span><b>Hbayebna</b><small data-i18n="brand.sub">Recruitment Agency</small></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#about" data-i18n="nav.about">About</a></li>
+      <li><a href="index.html#services" data-i18n="nav.services">Services</a></li>
+      <li><a href="index.html#clients" data-i18n="nav.clients">Clients</a></li>
+      <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+      <li><a href="employer.html" data-i18n="nav.hire">Hire Staff</a></li>
+      <li><a href="employee.html" aria-current="page" data-i18n="nav.job">Find a Job</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="ar" aria-pressed="false">عربي</button>
+      </div>
+      <button class="menu-btn" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow" data-i18n="ee.eyebrow">For chefs, waiters, baristas &amp; managers</span>
+        <h1 data-i18n="ee.title">Job seeker registration — join our candidates</h1>
+        <p data-i18n="ee.lead">Register once and we will match you with restaurants and hotels in Lebanon and the Gulf that fit your experience, salary expectations and the countries where you can work.</p>
+      </div>
+      <img src="assets/logo-sm.png" alt="" width="110" height="110">
+    </div>
+  </section>
+
+  <div class="wrap form-layout">
+    <aside class="steps-aside">
+      <ol class="steps-nav">
+        <li><a href="#s-personal" data-step="s-personal"><b>1</b><span data-i18n="ee.s1">Personal details</span></a></li>
+        <li><a href="#s-experience" data-step="s-experience"><b>2</b><span data-i18n="ee.s2">Position &amp; experience</span></a></li>
+        <li><a href="#s-expect" data-step="s-expect"><b>3</b><span data-i18n="ee.s3">Salary &amp; locations</span></a></li>
+        <li><a href="#s-docs" data-step="s-docs"><b>4</b><span data-i18n="ee.s4">Passport &amp; visa</span></a></li>
+        <li><a href="#s-cv" data-step="s-cv"><b>5</b><span data-i18n="ee.s5">CV &amp; confirmation</span></a></li>
+      </ol>
+      <p class="side-note" data-i18n="side.note">Fields marked * are required. Your information is used only to process your request.</p>
+    </aside>
+
+    <div class="ticket" id="ticket">
+      <div class="ticket-top">
+        <span data-i18n="ee.ticket">Candidate registration</span>
+        <span class="tno" id="refNo">HB-C-000000</span>
+      </div>
+
+      <form id="regForm" data-form="employee" data-ref-prefix="HB-C" novalidate>
+        <!-- 1. Personal -->
+        <fieldset id="s-personal">
+          <legend><span class="num">1</span><span data-i18n="ee.s1">Personal details</span></legend>
+          <div class="grid-2">
+            <div class="field">
+              <label for="fullName"><span data-i18n="f.fullName">Full name</span><span class="req">*</span></label>
+              <input type="text" id="fullName" name="fullName" required autocomplete="name">
+              <span class="err" data-i18n="err.required">This field is required.</span>
+            </div>
+            <div class="field">
+              <label for="dob"><span data-i18n="f.dob">Date of birth</span><span class="req">*</span></label>
+              <input type="date" id="dob" name="dob" required autocomplete="bday">
+              <span class="err" data-i18n="err.dob">Enter a valid date of birth (age 18 or older).</span>
+            </div>
+            <div class="field">
+              <span class="group-label" data-i18n="f.gender">Gender</span>
+              <div class="choices" data-list="genders" data-name="gender" data-type="radio"></div>
+            </div>
+            <div class="field">
+              <label for="nationality"><span data-i18n="f.nationality">Nationality</span><span class="req">*</span></label>
+              <input type="text" id="nationality" name="nationality" required data-i18n-ph="ph.nationality" placeholder="e.g. Lebanese">
+              <span class="err" data-i18n="err.required">This field is required.</span>
+            </div>
+            <div class="field">
+              <label for="currentCountry"><span data-i18n="f.currentCountry">Country you live in now</span><span class="req">*</span></label>
+              <select id="currentCountry" name="currentCountry" required data-list="countries"><option value="" data-i18n="sel.choose">Select…</option></select>
+              <span class="err" data-i18n="err.choose">Please choose an option.</span>
+            </div>
+            <div class="field">
+              <label for="city" data-i18n="f.city2">City</label>
+              <input type="text" id="city" name="city" autocomplete="address-level2">
+            </div>
+            <div class="field">
+              <label for="phone"><span data-i18n="f.phone">Phone / WhatsApp</span><span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+961 70 000 000" pattern="^\+?[0-9 ()\-]{7,20}$">
+              <span class="err" data-i18n="err.phone">Enter a valid phone number, e.g. +961 3 000 000.</span>
+            </div>
+            <div class="field">
+              <label for="email" data-i18n="f.email2">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="name@email.com">
+              <span class="err" data-i18n="err.email">Enter a valid email address.</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 2. Experience -->
+        <fieldset id="s-experience">
+          <legend><span class="num">2</span><span data-i18n="ee.s2">Position &amp; experience</span></legend>
+          <div class="grid-2">
+            <div class="field">
+              <label for="position"><span data-i18n="f.desiredPosition">Desired position</span><span class="req">*</span></label>
+              <select id="position" name="position" required data-list="positions"><option value="" data-i18n="sel.choose">Select…</option></select>
+              <span class="err" data-i18n="err.choose">Please choose an option.</span>
+            </div>
+            <div class="field">
+              <label for="secondPosition" data-i18n="f.secondPosition">Second position you can do</label>
+              <select id="secondPosition" name="secondPosition" data-list="positions"><option value="" data-i18n="sel.none">None</option></select>
+            </div>
+            <div class="field full cond" data-show-if="position=Other">
+              <label for="positionOther" data-i18n="f.specify">Please specify</label>
+              <input type="text" id="positionOther" name="positionOther">
+            </div>
+            <div class="field">
+              <label for="experienceYears"><span data-i18n="f.experienceYears">Years of experience</span><span class="req">*</span></label>
+              <input type="number" id="experienceYears" name="experienceYears" required min="0" max="50" step="1" inputmode="numeric" placeholder="5">
+              <span class="err" data-i18n="err.years">Enter a number from 0 to 50.</span>
+            </div>
+            <div class="field">
+              <label for="education" data-i18n="f.education">Education / training</label>
+              <select id="education" name="education" data-list="education"><option value="" data-i18n="sel.choose">Select…</option></select>
+            </div>
+            <div class="field">
+              <label for="lastPosition" data-i18n="f.lastPosition">Current or last job title</label>
+              <input type="text" id="lastPosition" name="lastPosition">
+            </div>
+            <div class="field">
+              <label for="lastEmployer" data-i18n="f.lastEmployer">Current or last employer</label>
+              <input type="text" id="lastEmployer" name="lastEmployer">
+            </div>
+            <div class="field full">
+              <span class="group-label" data-i18n="f.cuisineSkills">Cuisines / specialties you have worked with</span>
+              <div class="choices" data-list="cuisines" data-name="cuisineSkills" data-type="checkbox"></div>
+            </div>
+            <div class="field full" data-required-group="gulfExperience">
+              <span class="group-label"><span data-i18n="f.gulfExperience">Have you worked in the Gulf before?</span><span class="req">*</span></span>
+              <div class="choices" data-list="yesno" data-name="gulfExperience" data-type="radio"></div>
+              <span class="err" data-i18n="err.choose">Please choose an option.</span>
+            </div>
+            <div class="field full cond" data-show-if="gulfExperience=Yes">
+              <span class="group-label" data-i18n="f.gulfCountries">Which countries?</span>
+              <div class="choices" data-list="gulf" data-name="gulfCountries" data-type="checkbox"></div>
+            </div>
+            <div class="field full">
+              <span class="group-label" data-i18n="f.languages">Languages you speak</span>
+              <div class="choices" data-list="languages" data-name="languages" data-type="checkbox"></div>
+            </div>
+            <div class="field full">
+              <label for="certificates" data-i18n="f.certificates">Certificates</label>
+              <input type="text" id="certificates" name="certificates" data-i18n-ph="ph.certificates" placeholder="e.g. HACCP, food safety, barista course">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 3. Expectations -->
+        <fieldset id="s-expect">
+          <legend><span class="num">3</span><span data-i18n="ee.s3">Salary &amp; locations</span></legend>
+          <div class="grid-2">
+            <div class="field">
+              <label for="expectedSalary"><span data-i18n="f.expectedSalary">Expected monthly salary</span><span class="req">*</span></label>
+              <div class="inline two">
+                <input type="number" id="expectedSalary" name="expectedSalary" required min="0" inputmode="numeric" placeholder="800">
+                <select id="currency" name="currency" required data-list="currencies" aria-label="Currency"></select>
+              </div>
+              <span class="err" data-i18n="err.required">This field is required.</span>
+            </div>
+            <div class="field">
+              <span class="group-label" data-i18n="f.negotiable">Salary negotiable?</span>
+              <div class="choices" data-list="yesno" data-name="salaryNegotiable" data-type="radio"></div>
+            </div>
+            <div class="field full" data-required-group="workLocations">
+              <span class="group-label"><span data-i18n="f.workLocations">Locations where you are available to work</span><span class="req">*</span></span>
+              <div class="choices" data-list="workLocations" data-name="workLocations" data-type="checkbox"></div>
+              <span class="err" data-i18n="err.pickOne">Choose at least one.</span>
+            </div>
+            <div class="field">
+              <span class="group-label" data-i18n="f.relocate">Ready to travel / relocate?</span>
+              <div class="choices" data-list="yesno" data-name="relocate" data-type="radio"></div>
+            </div>
+            <div class="field">
+              <span class="group-label" data-i18n="f.needAccommodation">Need accommodation from employer?</span>
+              <div class="choices" data-list="yesno" data-name="needAccommodation" data-type="radio"></div>
+            </div>
+            <div class="field full">
+              <span class="group-label" data-i18n="f.employmentTypePref">Type of work you accept</span>
+              <div class="choices" data-list="employmentTypes" data-name="employmentTypePref" data-type="checkbox"></div>
+            </div>
+            <div class="field">
+              <label for="availability"><span data-i18n="f.availability">When can you start?</span><span class="req">*</span></label>
+              <select id="availability" name="availability" required data-list="availability"><option value="" data-i18n="sel.choose">Select…</option></select>
+              <span class="err" data-i18n="err.choose">Please choose an option.</span>
+            </div>
+            <div class="field">
+              <label for="availableFrom" data-i18n="f.availableFrom">Available from (date)</label>
+              <input type="date" id="availableFrom" name="availableFrom">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 4. Documents -->
+        <fieldset id="s-docs">
+          <legend><span class="num">4</span><span data-i18n="ee.s4">Passport &amp; visa</span></legend>
+          <div class="grid-2">
+            <div class="field" data-required-group="hasPassport">
+              <span class="group-label"><span data-i18n="f.hasPassport">Do you have a valid passport?</span><span class="req">*</span></span>
+              <div class="choices" data-list="yesno" data-name="hasPassport" data-type="radio"></div>
+              <span class="err" data-i18n="err.choose">Please choose an option.</span>
+            </div>
+            <div class="field cond" data-show-if="hasPassport=Yes">
+              <label for="passportExpiry" data-i18n="f.passportExpiry">Passport expiry date</label>
+              <input type="date" id="passportExpiry" name="passportExpiry">
+              <span class="hint" data-i18n="hint.passport">Most Gulf countries require at least 6 months of validity.</span>
+            </div>
+            <div class="field full" data-required-group="hasVisa">
+              <span class="group-label"><span data-i18n="f.hasVisa">Do you currently hold a valid visa or residency (iqama) for another country?</span><span class="req">*</span></span>
+              <div class="choices" data-list="yesno" data-name="hasVisa" data-type="radio"></div>
+              <span class="err" data-i18n="err.choose">Please choose an option.</span>
+            </div>
+            <div class="field cond" data-show-if="hasVisa=Yes">
+              <label for="visaCountry" data-i18n="f.visaCountry">Visa country</label>
+              <select id="visaCountry" name="visaCountry" data-list="countries"><option value="" data-i18n="sel.choose">Select…</option></select>
+            </div>
+            <div class="field cond" data-show-if="hasVisa=Yes">
+              <label for="visaType" data-i18n="f.visaType">Visa type</label>
+              <select id="visaType" name="visaType" data-list="visaTypes"><option value="" data-i18n="sel.choose">Select…</option></select>
+            </div>
+            <div class="field cond" data-show-if="hasVisa=Yes">
+              <label for="visaExpiry" data-i18n="f.visaExpiry">Visa expiry date</label>
+              <input type="date" id="visaExpiry" name="visaExpiry">
+            </div>
+            <div class="field full">
+              <span class="group-label" data-i18n="f.drivingLicense">Driving license?</span>
+              <div class="choices" data-list="yesno" data-name="drivingLicense" data-type="radio"></div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 5. CV -->
+        <fieldset id="s-cv">
+          <legend><span class="num">5</span><span data-i18n="ee.s5">CV &amp; confirmation</span></legend>
+          <div class="grid-2">
+            <div class="field full">
+              <label for="cvLink" data-i18n="f.cvLink">Link to your CV (Google Drive, Dropbox or LinkedIn)</label>
+              <input type="url" id="cvLink" name="cvLink" placeholder="https://drive.google.com/…">
+              <span class="hint" data-i18n="hint.cv">Make sure the link is shared as “Anyone with the link can view”. You can also send your CV on WhatsApp after submitting.</span>
+              <span class="err" data-i18n="err.url">Enter a full link starting with https://</span>
+            </div>
+            <div class="field full">
+              <label for="notes" data-i18n="f.notesEe">Tell us more about yourself</label>
+              <textarea id="notes" name="notes" data-i18n-ph="ph.notesEe" placeholder="Strengths, previous restaurants, special skills…"></textarea>
+            </div>
+            <div class="field full" data-required-group="consent">
+              <label class="consent"><input type="checkbox" id="consent" name="consent" value="Yes"><span data-i18n="f.consentEe">I confirm the information is correct and agree that Hbayebna keeps my profile in its candidate database and shares it with potential employers.</span></label>
+              <span class="err" data-i18n="err.consent">Please confirm to continue.</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-actions">
+          <span class="status" id="formStatus" role="status" aria-live="polite"></span>
+          <button class="btn" type="submit" id="submitBtn">
+            <span data-i18n="btn.submitEe">Submit my registration</span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </form>
+
+      <div class="success" id="success" hidden></div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© <span class="year">2026</span> <span data-i18n="ft.name">Hbayebna Recruitment Agency</span></span>
+    <span><a href="index.html" data-i18n="ft.back">Back to home</a></span>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forms.js"></script>
+</body>
+</html>
