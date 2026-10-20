@@ -96,18 +96,30 @@
   window.HB.lang = function () { return root.lang === "ar" ? "ar" : "en"; };
   window.HB.applyLang = applyLang;
 
-  /* ---------- mobile menu ---------- */
+  /* ---------- mobile menu ----------
+     The menu opens as a panel over the page (see .nav-links in
+     style.css), so the header never changes height. */
   function initMenu() {
     var btn = document.querySelector(".menu-btn");
     var links = document.getElementById("navLinks");
     if (!btn || !links) return;
-    btn.addEventListener("click", function () {
-      var open = links.classList.toggle("open");
+    var scrim = null;
+    function setOpen(open) {
+      links.classList.toggle("open", open);
       btn.setAttribute("aria-expanded", String(open));
-    });
-    links.addEventListener("click", function (e) {
-      if (e.target.closest("a")) { links.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); }
-    });
+      if (open && !scrim) {
+        scrim = document.createElement("div");
+        scrim.className = "nav-scrim";
+        scrim.addEventListener("click", function () { setOpen(false); });
+        document.body.appendChild(scrim);
+      } else if (!open && scrim) {
+        scrim.remove(); scrim = null;
+      }
+    }
+    btn.addEventListener("click", function () { setOpen(!links.classList.contains("open")); });
+    links.addEventListener("click", function (e) { if (e.target.closest("a")) setOpen(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && links.classList.contains("open")) { setOpen(false); btn.focus(); } });
+    window.matchMedia("(min-width: 981px)").addEventListener("change", function (mq) { if (mq.matches) setOpen(false); });
   }
 
   /* ---------- client logos (home page) ---------- */
@@ -125,7 +137,7 @@
     if (!grid) return;
     CLIENTS.forEach(function (c) {
       var fig = document.createElement("figure");
-      fig.innerHTML = '<img src="assets/clients/' + c[0] + '.jpg" alt="' + c[1] + '" title="' + c[1] + '">';
+      fig.innerHTML = '<img src="assets/clients/' + c[0] + '.jpg" alt="' + c[1] + '" title="' + c[1] + '" width="130" height="130" loading="lazy" decoding="async">';
       grid.appendChild(fig);
     });
   }

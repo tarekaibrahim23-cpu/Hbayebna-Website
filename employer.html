@@ -5,10 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title data-i18n="t.employer">Employer Registration · Hbayebna</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#0b6236">
+<meta name="format-detection" content="telephone=no">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Reem+Kufi:wght@500;700&family=Zilla+Slab:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Playpen+Sans+Arabic:wght@100..800&family=Poppins:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -33,7 +35,8 @@
         <button type="button" data-lang="ar" aria-pressed="false">عربي</button>
       </div>
       <button class="menu-btn" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="i-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
     </div>
   </div>
@@ -53,12 +56,7 @@
 
   <div class="wrap form-layout">
     <aside class="steps-aside">
-      <ol class="steps-nav">
-        <li><a href="#s-company" data-step="s-company"><b>1</b><span data-i18n="er.s1">Your establishment</span></a></li>
-        <li><a href="#s-vacancy" data-step="s-vacancy"><b>2</b><span data-i18n="er.s2">Position needed</span></a></li>
-        <li><a href="#s-offer" data-step="s-offer"><b>3</b><span data-i18n="er.s3">Salary &amp; benefits</span></a></li>
-        <li><a href="#s-extra" data-step="s-extra"><b>4</b><span data-i18n="er.s4">Other services</span></a></li>
-      </ol>
+      <ol class="steps-nav" id="stepsNav"></ol>
       <p class="side-note" data-i18n="side.note">Fields marked * are required. Your information is used only to process your request.</p>
     </aside>
 
@@ -71,7 +69,7 @@
       <form id="regForm" data-form="employer" data-ref-prefix="HB-E" novalidate>
         <!-- 1. Establishment -->
         <fieldset id="s-company">
-          <legend><span class="num">1</span><span data-i18n="er.s1">Your establishment</span></legend>
+          <legend><span class="num">1</span><span data-i18n="er.s1">Contact details</span></legend>
           <div class="grid-2">
             <div class="field">
               <label for="companyName"><span data-i18n="f.companyName">Restaurant / company name</span><span class="req">*</span></label>
@@ -97,6 +95,12 @@
               <input type="email" id="email" name="email" required autocomplete="email" placeholder="name@restaurant.com">
               <span class="err" data-i18n="err.email">Enter a valid email address.</span>
             </div>
+          </div>
+        </fieldset>
+
+        <fieldset id="s-restaurant">
+          <legend><span class="num">2</span><span data-i18n="er.s2">Your restaurant</span></legend>
+          <div class="grid-2">
             <div class="field">
               <label for="country"><span data-i18n="f.country">Country</span><span class="req">*</span></label>
               <select id="country" name="country" required data-list="countries"><option value="" data-i18n="sel.choose">Select…</option></select>
@@ -138,7 +142,7 @@
 
         <!-- 2. Vacancy -->
         <fieldset id="s-vacancy">
-          <legend><span class="num">2</span><span data-i18n="er.s2">Position needed</span></legend>
+          <legend><span class="num">3</span><span data-i18n="er.s3">Position needed</span></legend>
           <div class="grid-2">
             <div class="field">
               <label for="position"><span data-i18n="f.position">Position required</span><span class="req">*</span></label>
@@ -172,6 +176,12 @@
               <label for="educationRequired" data-i18n="f.educationRequired">Education / training required</label>
               <select id="educationRequired" name="educationRequired" data-list="education"><option value="" data-i18n="sel.choose">Select…</option></select>
             </div>
+          </div>
+        </fieldset>
+
+        <fieldset id="s-require">
+          <legend><span class="num">4</span><span data-i18n="er.s4">Requirements</span></legend>
+          <div class="grid-2">
             <div class="field full">
               <span class="group-label" data-i18n="f.languagesRequired">Languages required</span>
               <div class="choices" data-list="languages" data-name="languagesRequired" data-type="checkbox"></div>
@@ -194,7 +204,7 @@
 
         <!-- 3. Offer -->
         <fieldset id="s-offer">
-          <legend><span class="num">3</span><span data-i18n="er.s3">Salary &amp; benefits</span></legend>
+          <legend><span class="num">5</span><span data-i18n="er.s5">Salary &amp; benefits</span></legend>
           <div class="grid-2">
             <div class="field full">
               <label for="salaryMin"><span data-i18n="f.salaryRange">Salary offered (from – to)</span><span class="req">*</span></label>
@@ -235,7 +245,7 @@
 
         <!-- 4. Extra -->
         <fieldset id="s-extra">
-          <legend><span class="num">4</span><span data-i18n="er.s4">Other services</span></legend>
+          <legend><span class="num">6</span><span data-i18n="er.s6">Other services &amp; confirm</span></legend>
           <div class="grid-2">
             <div class="field full">
               <span class="group-label" data-i18n="f.otherServices">Are you also interested in any of these services?</span>

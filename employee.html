@@ -5,10 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title data-i18n="t.employee">Job Seeker Registration · Hbayebna</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#0b6236">
+<meta name="format-detection" content="telephone=no">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Reem+Kufi:wght@500;700&family=Zilla+Slab:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Playpen+Sans+Arabic:wght@100..800&family=Poppins:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -33,7 +35,8 @@
         <button type="button" data-lang="ar" aria-pressed="false">عربي</button>
       </div>
       <button class="menu-btn" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="Menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="i-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
     </div>
   </div>
@@ -53,13 +56,7 @@
 
   <div class="wrap form-layout">
     <aside class="steps-aside">
-      <ol class="steps-nav">
-        <li><a href="#s-personal" data-step="s-personal"><b>1</b><span data-i18n="ee.s1">Personal details</span></a></li>
-        <li><a href="#s-experience" data-step="s-experience"><b>2</b><span data-i18n="ee.s2">Position &amp; experience</span></a></li>
-        <li><a href="#s-expect" data-step="s-expect"><b>3</b><span data-i18n="ee.s3">Salary &amp; locations</span></a></li>
-        <li><a href="#s-docs" data-step="s-docs"><b>4</b><span data-i18n="ee.s4">Passport &amp; visa</span></a></li>
-        <li><a href="#s-cv" data-step="s-cv"><b>5</b><span data-i18n="ee.s5">CV &amp; confirmation</span></a></li>
-      </ol>
+      <ol class="steps-nav" id="stepsNav"></ol>
       <p class="side-note" data-i18n="side.note">Fields marked * are required. Your information is used only to process your request.</p>
     </aside>
 
@@ -149,6 +146,12 @@
               <label for="lastEmployer" data-i18n="f.lastEmployer">Current or last employer</label>
               <input type="text" id="lastEmployer" name="lastEmployer">
             </div>
+          </div>
+        </fieldset>
+
+        <fieldset id="s-skills">
+          <legend><span class="num">3</span><span data-i18n="ee.s3">Skills &amp; languages</span></legend>
+          <div class="grid-2">
             <div class="field full">
               <span class="group-label" data-i18n="f.cuisineSkills">Cuisines / specialties you have worked with</span>
               <div class="choices" data-list="cuisines" data-name="cuisineSkills" data-type="checkbox"></div>
@@ -175,7 +178,7 @@
 
         <!-- 3. Expectations -->
         <fieldset id="s-expect">
-          <legend><span class="num">3</span><span data-i18n="ee.s3">Salary &amp; locations</span></legend>
+          <legend><span class="num">4</span><span data-i18n="ee.s4">Salary &amp; locations</span></legend>
           <div class="grid-2">
             <div class="field">
               <label for="expectedSalary"><span data-i18n="f.expectedSalary">Expected monthly salary</span><span class="req">*</span></label>
@@ -220,7 +223,7 @@
 
         <!-- 4. Documents -->
         <fieldset id="s-docs">
-          <legend><span class="num">4</span><span data-i18n="ee.s4">Passport &amp; visa</span></legend>
+          <legend><span class="num">5</span><span data-i18n="ee.s5">Passport &amp; visa</span></legend>
           <div class="grid-2">
             <div class="field" data-required-group="hasPassport">
               <span class="group-label"><span data-i18n="f.hasPassport">Do you have a valid passport?</span><span class="req">*</span></span>
@@ -258,7 +261,7 @@
 
         <!-- 5. CV -->
         <fieldset id="s-cv">
-          <legend><span class="num">5</span><span data-i18n="ee.s5">CV &amp; confirmation</span></legend>
+          <legend><span class="num">6</span><span data-i18n="ee.s6">CV &amp; confirmation</span></legend>
           <div class="grid-2">
             <div class="field full">
               <label for="cvLink" data-i18n="f.cvLink">Link to your CV (Google Drive, Dropbox or LinkedIn)</label>

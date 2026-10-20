@@ -260,6 +260,9 @@
 
     form.hidden = true;
     successBox.hidden = false;
+    var prog = document.querySelector(".stage-progress"), cnt = document.querySelector(".stage-count");
+    if (prog) prog.hidden = true;
+    if (cnt) cnt.hidden = true;
     document.getElementById("copyBtn").addEventListener("click", function (e) {
       var b = e.currentTarget;
       var done = function () { b.textContent = T("copied"); };
@@ -269,7 +272,9 @@
     document.getElementById("againBtn").addEventListener("click", function () {
       form.reset(); REF = makeRef(); if (refEl) refEl.textContent = REF;
       successBox.hidden = true; form.hidden = false; lastState = null;
-      updateConditions(); updateProgress();
+      document.querySelector(".stage-progress").hidden = false;
+      document.querySelector(".stage-count").hidden = false;
+      updateConditions(); updateProgress(); window.HB.showStage(0, false);
       document.getElementById("ticket").scrollIntoView({ behavior: "smooth" });
     });
     document.getElementById("ticket").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -290,12 +295,14 @@
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     updateConditions();
+    if (current < stages.length - 1) { goTo(current + 1); return; }
     var bad = validateAll();
     if (bad) {
+      var fs = bad.closest("fieldset");
+      var idx = stages.indexOf(fs);
+      if (idx !== -1 && idx !== current) showStage(idx, false);
       statusEl.textContent = T("fixErrors");
-      bad.scrollIntoView({ behavior: "smooth", block: "center" });
-      var focusable = bad.querySelector("input, select, textarea");
-      if (focusable) setTimeout(function () { focusable.focus({ preventScroll: true }); }, 350);
+      focusField(bad);
       return;
     }
     lastData = collect();
@@ -312,6 +319,127 @@
       .catch(function (err) { console.warn("[Hbayebna] submit failed", err); renderSuccess("error"); })
       .finally(function () { submitBtn.disabled = false; statusEl.textContent = ""; });
   });
+
+  /* =========================================================
+     Wizard: one stage (fieldset) per screen
+     ========================================================= */
+  var stages = Array.prototype.slice.call(form.querySelectorAll("fieldset[id]"));
+  var current = 0;
+  var strip = document.getElementById("stepsNav");
+  var ticket = document.getElementById("ticket");
+
+  // step list (sidebar on desktop, scrollable chips on mobile) built from the legends
+  if (strip) {
+    stages.forEach(function (fs, i) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href = "#" + fs.id;
+      a.dataset.step = fs.id;
+      a.dataset.index = i;
+      var b = document.createElement("b");
+      b.textContent = i + 1;
+      a.appendChild(b);
+      a.appendChild(fs.querySelector("legend [data-i18n]").cloneNode(true));
+      li.appendChild(a);
+      strip.appendChild(li);
+    });
+    strip.addEventListener("click", function (e) {
+      var a = e.target.closest("a[data-index]");
+      if (!a) return;
+      e.preventDefault();
+      goTo(Number(a.dataset.index));
+    });
+  }
+
+  // progress line + "Step x of y"
+  var top = ticket.querySelector(".ticket-top");
+  var countEl = document.createElement("span");
+  countEl.className = "stage-count";
+  top.insertBefore(countEl, top.lastElementChild);
+  var bar = document.createElement("div");
+  bar.className = "stage-progress";
+  bar.innerHTML = "<span></span>";
+  top.insertAdjacentElement("afterend", bar);
+
+  // Back / Next buttons
+  var actions = form.querySelector(".form-actions");
+  var btnWrap = document.createElement("div");
+  btnWrap.className = "step-btns";
+  var backBtn = document.createElement("button");
+  backBtn.type = "button"; backBtn.className = "btn ghost"; backBtn.id = "backBtn";
+  var nextBtn = document.createElement("button");
+  nextBtn.type = "button"; nextBtn.className = "btn"; nextBtn.id = "nextBtn";
+  btnWrap.appendChild(backBtn); btnWrap.appendChild(nextBtn); btnWrap.appendChild(submitBtn);
+  actions.appendChild(btnWrap);
+  var ARROW = '<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var ARROW_BACK = '<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>';
+  function labelButtons() {
+    backBtn.innerHTML = ARROW_BACK + "<span>" + T("back") + "</span>";
+    nextBtn.innerHTML = "<span>" + T("next") + "</span>" + ARROW;
+    countEl.textContent = T("step").replace("{n}", current + 1).replace("{t}", stages.length);
+  }
+
+  function validateStage(i) {
+    var firstBad = null;
+    stages[i].querySelectorAll(".field").forEach(function (f) {
+      if (!validateField(f) && !firstBad) firstBad = f;
+    });
+    return firstBad;
+  }
+  function focusField(f) {
+    f.scrollIntoView({ behavior: "smooth", block: "center" });
+    var c = f.querySelector("input, select, textarea");
+    if (c) setTimeout(function () { c.focus({ preventScroll: true }); }, 300);
+  }
+  function showStage(i, scroll) {
+    current = Math.max(0, Math.min(i, stages.length - 1));
+    stages.forEach(function (fs, k) { fs.hidden = k !== current; });
+    var last = current === stages.length - 1;
+    backBtn.hidden = current === 0;
+    nextBtn.hidden = last;
+    submitBtn.hidden = !last;
+    bar.firstChild.style.width = ((current + 1) / stages.length * 100) + "%";
+    labelButtons();
+    statusEl.textContent = "";
+    if (strip) {
+      strip.querySelectorAll("a").forEach(function (a) {
+        var on = Number(a.dataset.index) === current;
+        a.classList.toggle("current", on);
+        if (on) a.setAttribute("aria-current", "step"); else a.removeAttribute("aria-current");
+      });
+      var active = strip.querySelector("a.current");
+      if (active && strip.scrollWidth > strip.clientWidth) {
+        var d = active.getBoundingClientRect().left - strip.getBoundingClientRect().left - 12;
+        strip.scrollBy({ left: d, behavior: "smooth" });
+      }
+    }
+    if (scroll) {
+      var r = ticket.getBoundingClientRect();
+      if (r.top < 0 || r.top > window.innerHeight * 0.4) ticket.scrollIntoView({ behavior: "smooth", block: "start" });
+      var firstInput = stages[current].querySelector("input:not([type=radio]):not([type=checkbox]), select, textarea");
+      if (firstInput && window.matchMedia("(hover: hover)").matches) setTimeout(function () { firstInput.focus({ preventScroll: true }); }, 250);
+    }
+  }
+  function goTo(target) {
+    // going back is always allowed; going forward requires every stage before it to be valid
+    if (target <= current) { showStage(target, true); return; }
+    for (var k = current; k < target; k++) {
+      var bad = validateStage(k);
+      if (bad) {
+        if (k !== current) showStage(k, false);
+        statusEl.textContent = T("stepErrors");
+        focusField(bad);
+        return;
+      }
+    }
+    showStage(target, true);
+  }
+  nextBtn.addEventListener("click", function () { goTo(current + 1); });
+  backBtn.addEventListener("click", function () { goTo(current - 1); });
+  document.addEventListener("hb:langchange", labelButtons);
+
+  showStage(0, false);
+  window.HB.showStage = showStage;
 
   updateConditions();
   updateProgress();

@@ -67,6 +67,8 @@ You do not need every key. Fields with no matching question are still included i
 Google Forms cannot receive file uploads from an external site, so candidates paste a link to their CV (Google Drive / LinkedIn) or send it on WhatsApp.
 
 ## Editing content
+- Form stages: each `<fieldset id="…">` in `employer.html` / `employee.html` is one stage of the step-by-step form. The step list, progress bar and Next/Back buttons are built automatically, so you can move, add or remove fieldsets freely.
+- Heading font: Playpen Sans Arabic (Google Fonts), set by `--f-display` in `css/style.css`.
 - Text: edit the English directly in the HTML. The Arabic version is in `js/i18n.js`, under the same `data-i18n` key.
 - Dropdown and checkbox options (positions, countries, cuisines, benefits…): `window.LISTS` in `js/i18n.js`.
 - Client logos: `assets/clients/` + the `CLIENTS` list in `js/main.js`.
